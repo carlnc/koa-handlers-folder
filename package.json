@@ -1,0 +1,15 @@
+{
+  "name": "koa-handlers-folder",
+  "version": "0.0.1",
+  "description": "Auto-register route handlers based on a file/folder structure.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "koa-router": "^5.4.0"
+  }
+}
