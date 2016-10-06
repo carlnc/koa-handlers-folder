@@ -19,7 +19,9 @@ function registerRoutes(folder, router, url) {
 
 	router.use(function* (next) {
 		if (this.request.url === url) { // missing trailing slash
-			return this.redirect(`${url}/`);
+			this.status = 301;
+			this.redirect(`${url}/`);
+			return;
 		} else {
 			yield next;
 		}
