@@ -32,6 +32,7 @@ const expect = [
   { method: 'post', route: '/level1/custom'},
   { method: 'put',  route: '/level1/custom'},
   { method: 'del',  route: '/level1/custom'},
+  { method: 'get',  route: '/level1/customArray/:id'},
   { method: 'get',  route: '/level1/otherFile'},
   { method: 'post', route: '/level1/otherFile'},
   { method: 'put',  route: '/level1/otherFile'},

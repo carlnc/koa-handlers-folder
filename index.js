@@ -57,12 +57,24 @@ function registerRoutes(folder, router, url) {
 					try {
 						const module = require(filePath);
 
-						if (typeof(module) === 'function') module(router, {path: url});
+						const fileUrlPath = url + '/' + urlFileName;
 
-						if (module.get) router.get(url + '/' + urlFileName, module.get);
-						if (module.post) router.post(url + '/' + urlFileName, module.post);
-						if (module.put) router.put(url + '/' + urlFileName, module.put);
-						if (module.del) router.del(url + '/' + urlFileName, module.del);
+						if (typeof(module) === 'function') {
+							module(router, {path: url});
+						} else if (module instanceof Array) {
+							module.forEach(args => {
+								args = args.slice(0); // cone the array
+								const method = args.shift();
+								args[0] = fileUrlPath + args[0];
+								router[method].apply(router, args);
+							});
+						}
+
+						if (module.get)  router.get(fileUrlPath, module.get);
+						if (module.post) router.post(fileUrlPath, module.post);
+						if (module.put)  router.put(fileUrlPath, module.put);
+						if (module.del)  router.del(fileUrlPath, module.del);
+
 					} catch(err) {
 						console.error('Unable to load route handler in %s', filePath);
 						console.error(err);
